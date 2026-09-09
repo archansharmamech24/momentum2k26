@@ -1,0 +1,574 @@
+/* ============================================================
+   MOMENTUM'26 — Page Module Styles
+   Premium Engineering Techfest Interface
+   Steel-Blue × Copper-Bronze × Industrial Metallic
+   ============================================================ */
+
+/* ── KEYFRAMES (must be in module scope) ── */
+@keyframes heroReveal {
+  from { opacity: 0; transform: translateY(-24px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes cardReveal {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50%      { opacity: 0.7; transform: scale(1.04); }
+}
+
+@keyframes drawLine {
+  from { width: 0; }
+  to   { width: 60px; }
+}
+
+@keyframes shimmerSweep {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}
+
+@keyframes breathe {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(200, 122, 45, 0); }
+  50%      { box-shadow: 0 0 12px 2px rgba(200, 122, 45, 0.08); }
+}
+
+/* ── LAYOUT ── */
+.main {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem 1.25rem 2rem;
+  max-width: 100%;
+}
+
+/* Split layout — stacked on mobile, side-by-side on desktop */
+.splitLayout {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Right panel — only meaningful on desktop */
+.rightPanel {
+  width: 100%;
+}
+
+/* ============================================================
+   HERO SECTION
+   ============================================================ */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: heroReveal 1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+}
+
+/* Logo container with ambient glow */
+.logoContainer {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoGlow {
+  position: absolute;
+  inset: -25%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(91, 143, 174, 0.1) 0%,
+    rgba(200, 122, 45, 0.06) 35%,
+    transparent 65%
+  );
+  animation: pulseGlow 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.logoImage {
+  position: relative;
+  z-index: 2;
+  width: 100% !important;
+  height: auto !important;
+  object-fit: contain;
+  filter: 
+    drop-shadow(0 0 40px rgba(91, 143, 174, 0.12))
+    drop-shadow(0 0 15px rgba(200, 122, 45, 0.08));
+}
+
+/* ── Hero Text Stack ── */
+.heroText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.heroLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+
+.heroDot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--copper);
+  box-shadow: 0 0 8px var(--copper);
+  animation: breathe 3s ease infinite;
+}
+
+.heroTitle {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  color: var(--text-primary);
+  text-shadow: 0 0 60px rgba(91, 143, 174, 0.08);
+}
+
+.heroYear {
+  color: var(--copper-light);
+}
+
+.heroSub {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--steel-light);
+  margin-top: 0.1rem;
+}
+
+.heroDivider {
+  width: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--steel-blue),
+    var(--copper),
+    transparent
+  );
+  margin: 0.65rem 0;
+  animation: drawLine 0.8s ease 1s forwards;
+}
+
+/* Instagram CTA Button */
+.instaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  padding: 0.5rem 1.1rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 100px;
+  background: rgba(13, 17, 23, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  margin-top: 0.25rem;
+}
+
+.instaButton:hover {
+  border-color: var(--border-copper);
+  color: var(--copper-light);
+  background: rgba(200, 122, 45, 0.08);
+  box-shadow: 0 0 20px rgba(200, 122, 45, 0.1);
+  transform: translateY(-1px);
+}
+
+.instaButton:active {
+  transform: scale(0.98);
+}
+
+.instaIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   SECTION HEADER — thin engineering divider
+   ============================================================ */
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  width: 100%;
+  max-width: 520px;
+  opacity: 0;
+  animation: cardReveal 0.6s ease 0.4s forwards;
+}
+
+.sectionLine {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+}
+
+.sectionLabel {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+/* ============================================================
+   EVENT CARDS — Premium engineering-grade
+   ============================================================ */
+.eventsGrid {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: 3.5rem;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: cardReveal 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Left accent bar — steel-to-copper metallic gradient */
+.cardAccent {
+  width: 3px;
+  align-self: stretch;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, var(--steel-blue), var(--copper));
+  transition: width 0.3s ease, opacity 0.3s ease;
+}
+
+/* Card body */
+.cardBody {
+  flex: 1;
+  padding: 0.9rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.cardTag {
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.15em;
+  color: var(--copper-light);
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.cardName {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* CTA area */
+.cardCta {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0 1rem 0 0;
+  flex-shrink: 0;
+}
+
+.ctaText {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  color: var(--text-dim);
+  transition: color 0.3s ease;
+}
+
+.ctaArrow {
+  width: 15px;
+  height: 15px;
+  color: var(--text-dim);
+  transition: all 0.3s ease;
+}
+
+/* Shimmer sweep layer */
+.cardShimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(91, 143, 174, 0.07) 50%,
+    transparent 60%
+  );
+  transform: translateX(-100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Card Hover States ── */
+.card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-steel);
+  background: var(--bg-card-hover);
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.3),
+    0 0 0 1px var(--border-steel),
+    inset 0 1px 0 rgba(91, 143, 174, 0.06);
+}
+
+.card:hover .cardAccent {
+  width: 5px;
+}
+
+.card:hover .ctaText {
+  color: var(--copper-light);
+}
+
+.card:hover .ctaArrow {
+  color: var(--copper-light);
+  transform: translateX(3px);
+}
+
+.card:hover .cardShimmer {
+  animation: shimmerSweep 0.65s ease forwards;
+}
+
+/* Focus state for a11y */
+.card:focus-visible {
+  outline: 2px solid var(--steel-light);
+  outline-offset: 2px;
+}
+
+/* Active press feedback */
+.card:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  width: 100%;
+  max-width: 520px;
+  text-align: center;
+  padding-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.footerDivider {
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--steel-blue), var(--copper));
+  margin-bottom: 1rem;
+  opacity: 0.4;
+}
+
+.footerBrand {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--text-secondary);
+}
+
+.footerDept {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  letter-spacing: 0.03em;
+}
+
+.footerCollege {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 0.1rem;
+}
+
+.footerMotto {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--copper);
+  opacity: 0.5;
+  margin-top: 0.4rem;
+}
+
+/* ============================================================
+   RESPONSIVE — Tablet+ (>= 640px)
+   ============================================================ */
+@media (min-width: 640px) {
+  .main {
+    padding: 3.5rem 2rem 3rem;
+  }
+
+  .logoContainer {
+    width: 250px;
+    height: 250px;
+    margin-bottom: 1rem;
+  }
+
+  .heroTitle {
+    font-size: 3.8rem;
+  }
+
+  .heroSub {
+    font-size: 1.15rem;
+  }
+
+  .heroLabel {
+    font-size: 0.72rem;
+  }
+
+  .eventsGrid {
+    gap: 0.8rem;
+  }
+
+  .cardBody {
+    padding: 1.1rem 1.25rem;
+  }
+
+  .cardName {
+    font-size: 1.25rem;
+  }
+
+  .ctaText {
+    font-size: 0.6rem;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — Desktop (>= 1024px) — SPLIT PANEL LAYOUT
+   ============================================================ */
+@media (min-width: 1024px) {
+  .main {
+    padding: 0;
+    align-items: stretch;
+    min-height: 100vh;
+  }
+
+  .splitLayout {
+    flex-direction: row;
+    max-width: 100%;
+    flex: 1;
+  }
+
+  /* Left panel: hero fixed to left side */
+  .hero {
+    position: sticky;
+    top: 0;
+    width: 45%;
+    max-width: 520px;
+    height: 100vh;
+    justify-content: center;
+    margin-bottom: 0;
+    padding: 3rem 2.5rem;
+    border-right: 1px solid var(--border-subtle);
+  }
+
+  .logoContainer {
+    width: 220px;
+    height: 220px;
+    margin-bottom: 1rem;
+  }
+
+  .heroTitle {
+    font-size: 3.2rem;
+  }
+
+  .heroLabel {
+    font-size: 0.72rem;
+  }
+
+  .heroSub {
+    font-size: 1.1rem;
+    margin-top: 0.6rem;
+  }
+
+  /* Right panel: scrollable events */
+  .rightPanel {
+    flex: 1;
+    padding: 3rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  .sectionHeader {
+    max-width: 100%;
+  }
+
+  .eventsGrid {
+    max-width: 100%;
+    margin-bottom: 0;
+  }
+
+  .cardBody {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .cardName {
+    font-size: 1.35rem;
+  }
+
+  /* Footer spans full width below both panels */
+  .footer {
+    max-width: 100%;
+    padding: 1.5rem 3rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+}

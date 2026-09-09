@@ -1,0 +1,260 @@
+/* ============================================================
+   MOMENTUM'26 — Global Design System
+   Visual DNA: Steel-Blue × Copper-Bronze, Industrial, Metallic
+   ============================================================ */
+
+:root {
+  /* === Logo-Derived Palette === */
+  --steel-blue:    #5B8FAE;
+  --steel-light:   #7FB3D0;
+  --steel-pale:    #A8D0E6;
+  --copper:        #C87A2D;
+  --copper-light:  #D4943A;
+  --copper-glow:   #E8A84C;
+  --bronze:        #9A6324;
+
+  /* === Backgrounds === */
+  --bg-deep:       #070A0F;
+  --bg-surface:    #0D1117;
+  --bg-card:       rgba(13, 17, 23, 0.85);
+  --bg-card-hover: rgba(20, 26, 36, 0.92);
+
+  /* === Text === */
+  --text-primary:  #E8ECF1;
+  --text-secondary:#8B99A8;
+  --text-dim:      #4A5568;
+
+  /* === Borders === */
+  --border-subtle: rgba(91, 143, 174, 0.12);
+  --border-steel:  rgba(91, 143, 174, 0.35);
+  --border-copper: rgba(200, 122, 45, 0.35);
+
+  /* === Glows === */
+  --glow-steel:  rgba(91, 143, 174, 0.15);
+  --glow-copper: rgba(200, 122, 45, 0.12);
+
+  /* === Fonts === */
+  --font-display: 'Rajdhani', 'Outfit', sans-serif;
+  --font-body:    'Inter', 'Roboto', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  /* === Radii === */
+  --r-xs: 3px;
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 16px;
+}
+
+/* === Reset === */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ============================================================
+   LAYERED BACKGROUND SYSTEM
+   ============================================================ */
+.background-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Subtle noise texture */
+.background-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity: 0.5;
+  z-index: 2;
+}
+
+/* Blueprint grid — the foundational engineering pattern */
+.tech-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(91, 143, 174, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91, 143, 174, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: 1;
+}
+
+/* Major grid lines every 4th line */
+.tech-grid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(91, 143, 174, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91, 143, 174, 0.08) 1px, transparent 1px);
+  background-size: 240px 240px;
+}
+
+/* Radial vignette overlay */
+.tech-grid::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 30%, transparent 0%, var(--bg-deep) 75%);
+}
+
+/* Ambient glow orbs — steel blue top-left, copper bottom-right */
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  animation: orb-drift 30s ease-in-out infinite alternate;
+}
+
+.glow-orb-1 {
+  width: 55vw;
+  height: 55vw;
+  max-width: 700px;
+  max-height: 700px;
+  top: -15%;
+  left: -15%;
+  background: radial-gradient(circle, var(--glow-steel), transparent 65%);
+}
+
+.glow-orb-2 {
+  width: 45vw;
+  height: 45vw;
+  max-width: 600px;
+  max-height: 600px;
+  bottom: -10%;
+  right: -10%;
+  background: radial-gradient(circle, var(--glow-copper), transparent 65%);
+  animation-delay: -12s;
+  animation-direction: alternate-reverse;
+}
+
+/* Decorative concentric gear arcs */
+.gear-arc {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid;
+  opacity: 0;
+  animation: gear-appear 1.2s ease-out forwards;
+}
+
+.gear-arc-1 {
+  width: 500px;
+  height: 500px;
+  top: 5%;
+  right: -15%;
+  border-color: rgba(91, 143, 174, 0.06);
+  border-style: dashed;
+  animation-delay: 0.3s;
+  animation-duration: 40s;
+  animation-name: gear-appear, slow-spin;
+  animation-iteration-count: 1, infinite;
+  animation-timing-function: ease-out, linear;
+  animation-fill-mode: forwards, none;
+}
+
+.gear-arc-2 {
+  width: 350px;
+  height: 350px;
+  bottom: 10%;
+  left: -10%;
+  border-color: rgba(200, 122, 45, 0.06);
+  animation-delay: 0.6s;
+  animation-duration: 55s;
+  animation-name: gear-appear, slow-spin-reverse;
+  animation-iteration-count: 1, infinite;
+  animation-timing-function: ease-out, linear;
+  animation-fill-mode: forwards, none;
+}
+
+/* Corner coordinate labels — blueprint detail */
+.coord-label {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  z-index: 3;
+}
+
+.coord-tl { top: 16px; left: 16px; animation-delay: 1s; }
+.coord-br { bottom: 16px; right: 16px; animation-delay: 1.2s; }
+
+/* ============================================================
+   KEYFRAMES
+   ============================================================ */
+@keyframes orb-drift {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(3%, 5%) scale(1.05); }
+  100% { transform: translate(-2%, -3%) scale(0.95); }
+}
+
+@keyframes slow-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes slow-spin-reverse {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+
+@keyframes gear-appear {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(-30px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}
+
+@keyframes pulse-ring {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50%      { opacity: 0.6; transform: scale(1.02); }
+}
+
+@keyframes divider-draw {
+  from { width: 0; }
+  to   { width: 60px; }
+}
