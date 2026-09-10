@@ -3,12 +3,12 @@ import styles from "./page.module.css";
 
 export default function Home() {
   const events = [
-    { name: "Robo Wars", url: "#", tag: "COMPETITION" },
-    { name: "Hackathon", url: "#", tag: "BUILD" },
-    { name: "CAD Modelling", url: "#", tag: "DESIGN" },
-    { name: "Paper Presentation", url: "#", tag: "RESEARCH" },
-    { name: "Technical Quiz", url: "#", tag: "QUIZ" },
-    { name: "Mystery Event", url: "#", tag: "SURPRISE" },
+    { name: "CADVista", url: "https://forms.gle/gKbb9LioK8j4NMxK8", tag: "DESIGN" },
+    { name: "Counterstrike 1.6", url: "https://forms.gle/VNwiZj1S7zPHpVza8", tag: "STRATEGY" },
+    { name: "Film se Reel Tak", url: "https://forms.gle/EyLKEUWAwhatihgz6", tag: "CREATIVITY" },
+    { name: "Rocket Shoot", url: "https://forms.gle/NazfsbtRZS5xbh298", tag: "BUILD" },
+    { name: "The Interview Room", url: "https://forms.gle/E5QL3AYtLbAJwWGY7", tag: "INTERACTIVE" },
+    { name: "AutoHUNT", url: "https://forms.gle/Ah1jMPthdMEgrtpY8", tag: "TREASURE HUNT" },
   ];
 
   return (
@@ -51,11 +51,11 @@ export default function Home() {
               </p>
               <div className={styles.heroDivider} />
               <a
-                href="https://www.instagram.com/momentum_scet"
+                href="https://www.instagram.com/momentum_2k26"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.instaButton}
-                aria-label="Follow MOMENTUM on Instagram"
+                aria-label="Follow us on Instagram"
               >
                 <svg
                   className={styles.instaIcon}
@@ -72,6 +72,7 @@ export default function Home() {
                 <span>Follow on Instagram</span>
               </a>
               <p className={styles.heroSub}>Technical Fest</p>
+              <p className={styles.credit}>Developed By: Archan Sharma</p>
             </div>
           </section>
 
