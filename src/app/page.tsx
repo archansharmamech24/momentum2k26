@@ -69,7 +69,7 @@ export default function Home() {
                   <circle cx="12" cy="12" r="5" stroke="currentColor" strokeWidth="1.5" />
                   <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" />
                 </svg>
-                <span>Follow on Instagram</span>
+                <span>Follow us on Instagram</span>
               </a>
               <p className={styles.heroSub}>Technical Fest</p>
               <p className={styles.credit}>Developed By: Archan Sharma</p>
